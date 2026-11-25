@@ -1,13 +1,8 @@
-import { Elysia } from 'elysia';
 import { CloudflareAdapter } from 'elysia/adapter/cloudflare-worker';
 import { env as cfEnv } from 'cloudflare:workers';
-import { authCallbackGet } from './api/api/auth/callback/[provider]/get';
+import { createApp } from './app';
 
-const env = cfEnv as Env;
-
-const app = new Elysia({ adapter: CloudflareAdapter, aot: false, normalize: 'typebox' })
-  .use(authCallbackGet(env))
-  .get('/health', () => ({ ok: true }));
+const app = createApp(cfEnv as Env, { adapter: CloudflareAdapter, aot: false, normalize: 'typebox' });
 
 export default {
   fetch: (request: Request) => app.fetch(request),

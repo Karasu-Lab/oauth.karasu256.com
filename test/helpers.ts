@@ -1,6 +1,5 @@
-import { Elysia } from 'elysia';
 import { vi } from 'vitest';
-import { authCallbackGet } from '../src/api/api/auth/callback/[provider]/get';
+import { createApp } from '../src/app';
 
 export const secret = 'test-oauth-proxy-secret';
 
@@ -49,5 +48,5 @@ export function stubPreviews(origins: string[]) {
 }
 
 export function callback(env: Env, search: string, provider = 'github') {
-  return new Elysia().use(authCallbackGet(env)).handle(new Request(`https://oauth.test/api/auth/callback/${provider}${search}`));
+  return createApp(env).handle(new Request(`https://oauth.test/api/auth/callback/${provider}${search}`));
 }
