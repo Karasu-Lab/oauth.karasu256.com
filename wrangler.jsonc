@@ -1,0 +1,40 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "oauth-karasu256-com",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": false,
+    },
+  },
+  "routes": [{ "pattern": "oauth.karasu256.com", "custom_domain": true }],
+  "vars": {
+    "APP_ENV": "production",
+    "PRODUCTION_ORIGIN": "https://api-auth.karasu256.com",
+  },
+  "env": {
+    "dev": {
+      "name": "dev-oauth-karasu256-com",
+      "routes": [{ "pattern": "dev-oauth.karasu256.com", "custom_domain": true }],
+      "vars": {
+        "APP_ENV": "preview",
+        "API_URL": "https://api.karasu256.com",
+        "PRODUCTION_ORIGIN": "https://api-auth.karasu256.com",
+        "PREVIEW_ORIGIN_DOMAIN": "dev-api-auth.karasu256.com",
+      },
+    },
+    "local": {
+      "routes": [],
+      "vars": {
+        "APP_ENV": "local",
+        "API_URL": "http://localhost:8789",
+        "PRODUCTION_ORIGIN": "http://localhost:8790",
+        "PREVIEW_ORIGIN_DOMAIN": "dev-api-auth.karasu256.com",
+        "OAUTH_PROXY_SECRET": "local-development-oauth-proxy-secret",
+      },
+    },
+  },
+}
