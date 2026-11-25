@@ -10,24 +10,22 @@
       "invocation_logs": false,
     },
   },
-  "routes": [
-    { "pattern": "oauth.karasu256.com", "custom_domain": true },
-    { "pattern": "dev-oauth.karasu256.com", "custom_domain": true, "previews_enabled": true, "enabled": false },
-  ],
+  "routes": [{ "pattern": "oauth.karasu256.com", "custom_domain": true }],
   "vars": {
     "APP_ENV": "production",
     "PRODUCTION_ORIGIN": "https://api-auth.karasu256.com",
   },
-  "preview_urls": true,
-  "previews": {
-    "vars": {
-      "APP_ENV": "preview",
-      "API_URL": "https://api.karasu256.com",
-      "PRODUCTION_ORIGIN": "https://api-auth.karasu256.com",
-      "PREVIEW_ORIGIN_DOMAIN": "dev-api-auth.karasu256.com",
-    },
-  },
   "env": {
+    "dev": {
+      "name": "dev-oauth-karasu256-com",
+      "routes": [{ "pattern": "dev-oauth.karasu256.com", "custom_domain": true }],
+      "vars": {
+        "APP_ENV": "preview",
+        "API_URL": "https://api.karasu256.com",
+        "PRODUCTION_ORIGIN": "https://api-auth.karasu256.com",
+        "PREVIEW_ORIGIN_DOMAIN": "dev-api-auth.karasu256.com",
+      },
+    },
     "local": {
       "routes": [],
       "vars": {

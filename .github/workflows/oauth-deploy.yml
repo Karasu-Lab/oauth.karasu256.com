@@ -37,11 +37,12 @@ jobs:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
       NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CLOUDFLARE_ENV: dev
     steps:
       - uses: Karasu-Lab/WorkersDeploy@v1
         with:
-          mode: preview
-          worker-name: oauth-karasu256-com
+          mode: production
+          worker-name: dev-oauth-karasu256-com
           secret-names: OAUTH_PROXY_SECRET
           vars-json: ${{ toJSON(vars) }}
           secrets-json: ${{ toJSON(secrets) }}
