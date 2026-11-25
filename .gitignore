@@ -1,0 +1,17 @@
+logs
+*.log
+pnpm-debug.log*
+
+node_modules
+.direnv
+.turbo
+dist
+.wrangler
+dist-ssr
+*.local
+.dev.vars*
+
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
