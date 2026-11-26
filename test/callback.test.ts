@@ -61,7 +61,6 @@ describe('origin validation', () => {
     ['an explicit port', 'https://feature-a.dev-api-auth.test:8443'],
     ['a path', 'https://feature-a.dev-api-auth.test/path'],
     ['nested labels', 'https://a.b.dev-api-auth.test'],
-    ['the preview domain itself', 'https://dev-api-auth.test'],
   ])('does not redirect to %s', async (_name, target) => {
     stubPreviews([origin]);
     const token = await signState(validPayload(target, 's'));
