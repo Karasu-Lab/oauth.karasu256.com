@@ -7,12 +7,14 @@ export function parsePreviewOrigin(config: DispatchConfig, origin: string) {
   if (!URL.canParse(origin)) return null;
   const url = new URL(origin);
   if (url.protocol !== 'https:' || url.username || url.password || url.port || url.origin !== origin) return null;
+  if (url.hostname === config.previewDomain) return url.origin;
   const suffix = `.${config.previewDomain}`;
   if (!url.hostname.endsWith(suffix)) return null;
   return /^[a-z0-9-]+$/.test(url.hostname.slice(0, -suffix.length)) ? url.origin : null;
 }
 
 export async function previewExists(config: DispatchConfig, origin: string) {
+  if (origin === `https://${config.previewDomain}`) return true;
   const response = await fetch(new URL(`/api/previews/${config.previewDomain}`, config.apiUrl)).catch(() => null);
   if (!response?.ok) return false;
   const previews = previewsSchema.safeParse(await response.json().catch(() => null));
